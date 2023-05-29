@@ -1,5 +1,6 @@
 package com.example.projectteste.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.projectteste.repositories.UserRepository
@@ -12,6 +13,8 @@ class UserViewModel(
     fun getAllUsers() = viewModelScope.launch {
 
         val users = userRepository.getAllUsers()
-
+        for(user in users){
+            Log.i("List", user.login)
+        }
     }
 }
