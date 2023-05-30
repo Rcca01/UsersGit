@@ -14,8 +14,8 @@ class UserViewModel(
     private val userRepository: UserRepository,
 ): ViewModel() {
 
-    private val listMutUsers: MutableLiveData<NetworkViewState<List<User>>> = MutableLiveData()
-    fun listUsers(): LiveData<NetworkViewState<List<User>>> = listMutUsers
+    private val listMutUsers: MutableLiveData<NetworkViewState> = MutableLiveData()
+    fun listUsers(): LiveData<NetworkViewState> = listMutUsers
 
     fun getAllUsers() = viewModelScope.launch {
         try {
