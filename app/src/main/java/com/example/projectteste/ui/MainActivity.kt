@@ -2,6 +2,7 @@ package com.example.projectteste.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Adapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ class MainActivity: AppCompatActivity() {
         setListenerListUsers()
         binding.recycleView.adapter = adapterList
         binding.btnShowList.setOnClickListener {
+            binding.loadingList.visibility = View.VISIBLE
             userViewModel.getAllUsers()
         }
     }
@@ -32,6 +34,7 @@ class MainActivity: AppCompatActivity() {
     private fun setListenerListUsers(){
         userViewModel.listUsers().observe(this, Observer {
             adapterList.setUsers(it)
+            binding.loadingList.visibility = View.GONE
             Toast.makeText(this, "Lista ok", Toast.LENGTH_LONG).show()
         })
     }
