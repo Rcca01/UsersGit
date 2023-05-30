@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Adapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.projectteste.adapter.UserAdapter
 import com.example.projectteste.databinding.ActivityMainBinding
@@ -24,6 +25,7 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setListenerListUsers()
+        setListFault()
         binding.recycleView.adapter = adapterList
         binding.btnShowList.setOnClickListener {
             binding.loadingList.visibility = View.VISIBLE
@@ -35,7 +37,13 @@ class MainActivity: AppCompatActivity() {
         userViewModel.listUsers().observe(this, Observer {
             adapterList.setUsers(it)
             binding.loadingList.visibility = View.GONE
-            Toast.makeText(this, "Lista ok", Toast.LENGTH_LONG).show()
+        })
+    }
+
+    private fun setListFault(){
+        userViewModel.statusError().observe(this, Observer { message ->
+            binding.loadingList.visibility = View.GONE
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         })
     }
 }
