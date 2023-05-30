@@ -38,7 +38,6 @@ class MainActivity: AppCompatActivity() {
             when(networkViewState){
                 is NetworkViewState.Success -> {
                     adapterList.setUsers(networkViewState.data)
-                    binding.loadingList.visibility = View.GONE
                     hideLoading()
                 }
                 is NetworkViewState.Error -> {
